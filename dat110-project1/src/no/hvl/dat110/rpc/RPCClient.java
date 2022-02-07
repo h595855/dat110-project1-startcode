@@ -18,7 +18,7 @@ public class RPCClient {
 		// TODO - START
 		// connect using the underlying messaging layer connection
 		
-		connection =msgclient.connect();
+		connection = msgclient.connect();
 		
 		// TODO - END
 	}
@@ -37,9 +37,8 @@ public class RPCClient {
 		byte[] returnval = null;
 		
 		// TODO - START 
-		connection.send(new Message(params));
 		
-		returnval = connection.receive().getData();
+	
 		/* 
 		 * 
 		Make a remote call on the RPC server by sending an RPC request message
@@ -52,12 +51,11 @@ public class RPCClient {
 			
 		*/	
 		
+		Message requestMessage = new Message(RPCUtils.encapsulate(rpcid, params));
 		
+		connection.send(requestMessage);
 		
-		
-		returnval = connection.receive().getData();
-			
-			
+		returnval = RPCUtils.decapsulate(connection.receive().getData());
 		// TODO - END
 		return returnval;
 		

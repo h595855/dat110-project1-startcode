@@ -15,11 +15,11 @@ public class RPCUtils {
 		// Encapsulate the rpcid and payload in a byte array according to the RPC
 		// message syntax
 
-		rpcmsg = new byte[payload.length + 1];
+		rpcmsg = new byte[payload.length+1];
 		rpcmsg[0] = rpcid;
 
 		for (int i = 1; i < payload.length + 1; i++) {
-			rpcmsg[i] = payload[i - 1];
+			rpcmsg[i] = payload[i-1];
 		}
 
 		// TODO - END
@@ -35,12 +35,13 @@ public class RPCUtils {
 
 		// Decapsulate the rpcid and payload in a byte array according to the RPC
 		// message syntax
-		int lengde = rpcmsg.length-1;
-		payload = new byte[lengde];
-		for(int i = 1; i < payload.length+1;i++) {
-			payload[i-1] = rpcmsg[i];
-		}
 		
+		payload = new byte[rpcmsg.length-1];
+		
+		for (int i = 0; i < payload.length; i++) {
+			payload[i] = rpcmsg[i+1];
+		}
+
 		// TODO - END
 
 		return payload;
@@ -49,7 +50,7 @@ public class RPCUtils {
 
 	public static byte[] marshallString(String str) {
 
-		byte[] encoded = new byte[str.length()];
+		byte[] encoded = new byte[2];
 
 		// TODO - START
 		encoded = str.getBytes();
@@ -72,7 +73,7 @@ public class RPCUtils {
 
 	public static byte[] marshallVoid() {
 
-		byte[] encoded = null;
+		byte[] encoded = new byte[1];
 
 		// TODO - START
 
@@ -84,10 +85,7 @@ public class RPCUtils {
 
 	public static void unmarshallVoid(byte[] data) {
 
-		// TODO
-
-		if (true)
-			throw new UnsupportedOperationException(TODO.method());
+		return;
 
 	}
 

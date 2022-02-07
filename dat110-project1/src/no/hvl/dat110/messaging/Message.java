@@ -8,7 +8,7 @@ public class Message {
 
 	public Message(byte[] data) {
 		
-		if(data.length <= 127 && data != null) {
+		if(data.length <= 127) {
 			this.data = data;
 		}else {
 			this.data = null;
